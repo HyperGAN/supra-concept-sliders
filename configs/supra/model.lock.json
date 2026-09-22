@@ -1,0 +1,48 @@
+{
+  "model": "SupraLabs/Supra2-IMG",
+  "repo": "SupraLabs/Supra2-IMG",
+  "revision": "10dec6e4b4b5d1c44fd1d7d3fe5e50137333da5b",
+  "license": "apache-2.0",
+  "library": "transformers",
+  "architecture": "SupraDiT",
+  "checkpoint": "model_final_ema.pt",
+  "checkpoint_sha256": null,
+  "weights_vendored": false,
+  "params": 104094736,
+  "params_millions": 104.1,
+  "encoder": {
+    "repo": "google/flan-t5-base",
+    "frozen": true,
+    "ctx_len": 128,
+    "d_ctx": 768
+  },
+  "vae": {
+    "repo": "stabilityai/sd-vae-ft-mse",
+    "scale": 0.18215
+  },
+  "arch": {
+    "d_model": 576,
+    "depth": 14,
+    "n_heads": 9,
+    "head_dim": 64,
+    "mlp_ratio": 4.0,
+    "resolution": 256,
+    "latent_size": 32,
+    "patch": 2
+  },
+  "hub_files": [
+    "config.json",
+    "inference.py",
+    "model_final_ema.pt"
+  ],
+  "defaults": {
+    "steps": 50,
+    "cfg": 3.0,
+    "width": 256,
+    "height": 256,
+    "sampler": "euler_flow",
+    "euler": "t_i = i/K; z <- z + (1/K) * v",
+    "cfg_formula": "v_uncond + cfg * (v_cond - v_uncond)"
+  },
+  "note": "Revision is the Hub git SHA of the model card. The checkpoint SHA256 is unrecorded until a release hashes a local model_final_ema.pt. This file does not download weights."
+}

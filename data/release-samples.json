@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "status": "pending",
+  "comparison": ["particle", "distill", "off"],
+  "order": "Particle, then Distill, then Off",
+  "seed": 29001,
+  "width": 256,
+  "height": 256,
+  "steps": 50,
+  "cfg": 3.0,
+  "sampler": "euler_flow",
+  "note": "No renders in this revision. Cases reserve the dev prompt and seed for a future gallery. Image paths stay null until files exist.",
+  "cases": [
+    {
+      "variation": "sunlit",
+      "case": 0,
+      "split": "dev",
+      "prompt": "a person standing in a doorway, neutral daylight, even illumination",
+      "positive": "a person standing in a doorway, honey-colored sun across the floor",
+      "seed": 29001,
+      "width": 256,
+      "height": 256,
+      "steps": 50,
+      "cfg": 3.0,
+      "strengths": {
+        "particle": 1,
+        "distill": 1,
+        "off": 0
+      },
+      "images": null
+    }
+  ]
+}

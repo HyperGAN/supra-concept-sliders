@@ -1,0 +1,6 @@
+{
+  "status": "todo",
+  "plugin_wired": false,
+  "node_class_count": 0,
+  "note": "TODO: comfy_particle.py exports empty node maps. See COMFYUI.md."
+}

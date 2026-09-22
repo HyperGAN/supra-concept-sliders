@@ -1,0 +1,17 @@
+# Held-out Sunlit prompts. Do not pass this file as --prompts_file for training.
+# Same loader schema as data/prompts-supra.yaml.
+plus_label: sunlit
+minus_label: ""
+recommended_range: [-2.0, 2.0]
+concept_words: "warm, golden, sunlit, glow"
+rows:
+  - id: sunlit-dev-00
+    target: "a person standing in a doorway, neutral daylight, even illumination"
+    positive: "a person standing in a doorway, honey-colored sun across the floor"
+    neutral: "a person standing in a doorway, neutral daylight, even illumination"
+    attributes:
+      - indoor
+    action: enhance
+    guidance_scale: 3.0
+    resolution: 256
+    batch_size: 1

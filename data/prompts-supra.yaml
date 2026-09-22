@@ -1,0 +1,57 @@
+# Sunlit train prompts for Supra2-IMG.
+# Pass this path to particle-sliders:
+#   train_lora_supra.py --prompts_file <this file>
+# Schema: conceptmod.textsliders.supra_slider.load_supra_prompts.
+# Captions are "{character}, {lighting}". attributes are unused-token
+# hold pins and are not prefixed onto captions. concept_words are not held.
+# Dev rows are data/prompts-supra-dev.yaml and must stay out of this file.
+# The first two rows match the particle-sliders prompts-supra.yaml stub.
+plus_label: sunlit
+minus_label: ""
+recommended_range: [-2.0, 2.0]
+concept_words: "warm, golden, sunlit, glow"
+rows:
+  - id: sunlit-train-00
+    target: "a woman sitting by a window, neutral daylight, even illumination"
+    positive: "a woman sitting by a window, warm golden sunlit glow"
+    neutral: "a woman sitting by a window, neutral daylight, even illumination"
+    attributes:
+      - indoor
+      - portrait
+    action: enhance
+    guidance_scale: 3.0
+    resolution: 256
+    batch_size: 1
+  - id: sunlit-train-01
+    target: "a man reading at a table, neutral daylight, even illumination"
+    positive: "a man reading at a table, warm golden sunlit glow"
+    neutral: "a man reading at a table, neutral daylight, even illumination"
+    attributes:
+      - indoor
+      - portrait
+    action: enhance
+    guidance_scale: 3.0
+    resolution: 256
+    batch_size: 1
+  - id: sunlit-train-02
+    target: "a woman sitting by a window, neutral daylight, even illumination"
+    positive: "a woman sitting by a window, amber sunlight, warm glow"
+    neutral: "a woman sitting by a window, neutral daylight, even illumination"
+    attributes:
+      - indoor
+      - portrait
+    action: enhance
+    guidance_scale: 3.0
+    resolution: 256
+    batch_size: 1
+  - id: sunlit-train-03
+    target: "a man reading at a table, neutral daylight, even illumination"
+    positive: "a man reading at a table, amber sunlight, warm glow"
+    neutral: "a man reading at a table, neutral daylight, even illumination"
+    attributes:
+      - indoor
+      - portrait
+    action: enhance
+    guidance_scale: 3.0
+    resolution: 256
+    batch_size: 1

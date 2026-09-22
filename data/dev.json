@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "status": "scaffolding",
+  "split": "dev",
+  "model": "SupraLabs/Supra2-IMG",
+  "concept": "sunlit",
+  "kind": "lighting",
+  "seeds_status": "unassigned",
+  "note": "Held-out catalog. Do not train on these rows. The reserved gallery case uses this neutral prompt at seed 29001 once samples exist.",
+  "rows": [
+    {
+      "id": "sunlit-dev-00",
+      "variation": "sunlit",
+      "split": "dev",
+      "character": "sunlit-char-03",
+      "definition": "sunlit-03",
+      "resolution": 256,
+      "guidance_scale": 3.0,
+      "attributes": ["indoor"],
+      "action": "enhance",
+      "neutral": "a person standing in a doorway, neutral daylight, even illumination",
+      "positive": "a person standing in a doorway, honey-colored sun across the floor",
+      "target": "a person standing in a doorway, neutral daylight, even illumination"
+    }
+  ]
+}

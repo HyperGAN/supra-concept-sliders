@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sunlit-char-01",
+    "split": "train",
+    "presentation": "woman",
+    "caption": "a woman sitting by a window",
+    "attributes": ["indoor", "portrait"]
+  },
+  {
+    "id": "sunlit-char-02",
+    "split": "train",
+    "presentation": "man",
+    "caption": "a man reading at a table",
+    "attributes": ["indoor", "portrait"]
+  },
+  {
+    "id": "sunlit-char-03",
+    "split": "dev",
+    "presentation": "person",
+    "caption": "a person standing in a doorway",
+    "attributes": ["indoor"]
+  }
+]

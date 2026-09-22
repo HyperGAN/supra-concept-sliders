@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "id": "candlelit-v1",
+  "label": "Candlelit",
+  "status": "draft",
+  "kind": "lighting",
+  "description": "Neutral daylight to warm low-key candle light. Draft card only. It is not in the train or dev prompt files.",
+  "variation": "candlelit",
+  "definitions": [
+    {
+      "split": "train",
+      "lighting": "warm candlelight, soft amber glow, low-key shadows",
+      "neutral_lighting": "neutral daylight, even illumination"
+    },
+    {
+      "split": "eval",
+      "lighting": "a single candle pooling warm light against a dim room",
+      "neutral_lighting": "neutral daylight, even illumination"
+    }
+  ],
+  "trained": false,
+  "in_train_file": false
+}

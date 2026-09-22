@@ -1,0 +1,6 @@
+{
+  "status": "todo",
+  "fitted": false,
+  "relative_mse": null,
+  "note": "TODO: ordinary-LoRA distillation is not fitted. See DISTILLATION.md."
+}

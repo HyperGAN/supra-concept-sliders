@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "status": "scaffolding",
+  "split": "train",
+  "model": "SupraLabs/Supra2-IMG",
+  "concept": "sunlit",
+  "kind": "lighting",
+  "seeds_status": "unassigned",
+  "note": "Planned catalog compiled from configs/supra/characters.json and definitions.json. Not a record of a finished run. Target caches are not in this repo.",
+  "rows": [
+    {
+      "id": "sunlit-train-00",
+      "variation": "sunlit",
+      "split": "train",
+      "character": "sunlit-char-01",
+      "definition": "sunlit-01",
+      "resolution": 256,
+      "guidance_scale": 3.0,
+      "attributes": ["indoor", "portrait"],
+      "action": "enhance",
+      "neutral": "a woman sitting by a window, neutral daylight, even illumination",
+      "positive": "a woman sitting by a window, warm golden sunlit glow",
+      "target": "a woman sitting by a window, neutral daylight, even illumination"
+    },
+    {
+      "id": "sunlit-train-01",
+      "variation": "sunlit",
+      "split": "train",
+      "character": "sunlit-char-02",
+      "definition": "sunlit-01",
+      "resolution": 256,
+      "guidance_scale": 3.0,
+      "attributes": ["indoor", "portrait"],
+      "action": "enhance",
+      "neutral": "a man reading at a table, neutral daylight, even illumination",
+      "positive": "a man reading at a table, warm golden sunlit glow",
+      "target": "a man reading at a table, neutral daylight, even illumination"
+    },
+    {
+      "id": "sunlit-train-02",
+      "variation": "sunlit",
+      "split": "train",
+      "character": "sunlit-char-01",
+      "definition": "sunlit-02",
+      "resolution": 256,
+      "guidance_scale": 3.0,
+      "attributes": ["indoor", "portrait"],
+      "action": "enhance",
+      "neutral": "a woman sitting by a window, neutral daylight, even illumination",
+      "positive": "a woman sitting by a window, amber sunlight, warm glow",
+      "target": "a woman sitting by a window, neutral daylight, even illumination"
+    },
+    {
+      "id": "sunlit-train-03",
+      "variation": "sunlit",
+      "split": "train",
+      "character": "sunlit-char-02",
+      "definition": "sunlit-02",
+      "resolution": 256,
+      "guidance_scale": 3.0,
+      "attributes": ["indoor", "portrait"],
+      "action": "enhance",
+      "neutral": "a man reading at a table, neutral daylight, even illumination",
+      "positive": "a man reading at a table, amber sunlight, warm glow",
+      "target": "a man reading at a table, neutral daylight, even illumination"
+    }
+  ]
+}

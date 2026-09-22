@@ -1,0 +1,14 @@
+{
+  "status": "scaffolding",
+  "product": "supra-concept-sliders",
+  "model": "SupraLabs/Supra2-IMG",
+  "backend_repository": "https://github.com/HyperGAN/particle-sliders",
+  "backend_pull_request": 130,
+  "trainer": "conceptmod/textsliders/train_lora_supra.py",
+  "samples": false,
+  "distill": false,
+  "comfy": false,
+  "weights_vendored": false,
+  "concept": "lighting",
+  "resolution": 256
+}

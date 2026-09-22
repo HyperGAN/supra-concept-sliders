@@ -1,0 +1,11 @@
+Supra Concept Sliders is a product repository for adapters on
+SupraLabs/Supra2-IMG. It is an independent HyperGAN project.
+
+The base model is published by SupraLabs at
+https://huggingface.co/SupraLabs/Supra2-IMG under the Apache License 2.0.
+This repository does not vendor `model_final_ema.pt`, Flan-T5-Base, or
+SD-VAE-FT-MSE. Rights to those weights stay with their publishers.
+
+Source in this repository is MIT (LICENSE). The train and infer
+implementation lives in HyperGAN/particle-sliders (`train_lora_supra.py`,
+pull request 130) and is pinned by `backend.lock.json`.

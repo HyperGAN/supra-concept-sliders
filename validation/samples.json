@@ -1,0 +1,7 @@
+{
+  "status": "pending",
+  "samples_present": false,
+  "comparison": ["particle", "distill", "off"],
+  "manifest": "data/release-samples.json",
+  "note": "TODO: publish matched 256² renders before claiming a gallery."
+}

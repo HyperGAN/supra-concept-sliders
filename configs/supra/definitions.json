@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sunlit-01",
+    "variation": "sunlit",
+    "split": "train",
+    "lighting": "warm golden sunlit glow",
+    "neutral_lighting": "neutral daylight, even illumination"
+  },
+  {
+    "id": "sunlit-02",
+    "variation": "sunlit",
+    "split": "train",
+    "lighting": "amber sunlight, warm glow",
+    "neutral_lighting": "neutral daylight, even illumination"
+  },
+  {
+    "id": "sunlit-03",
+    "variation": "sunlit",
+    "split": "eval",
+    "lighting": "honey-colored sun across the floor",
+    "neutral_lighting": "neutral daylight, even illumination"
+  }
+]

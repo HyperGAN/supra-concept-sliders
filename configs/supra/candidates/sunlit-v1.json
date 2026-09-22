@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "id": "sunlit-v1",
+  "label": "Sunlit",
+  "status": "scaffolding",
+  "kind": "lighting",
+  "description": "Neutral daylight to a warm golden sun. The first Supra2-IMG concept card.",
+  "variation": "sunlit",
+  "definition_ids": ["sunlit-01", "sunlit-02", "sunlit-03"],
+  "train_prompts": "data/prompts-supra.yaml",
+  "dev_prompts": "data/prompts-supra-dev.yaml",
+  "trained": false
+}

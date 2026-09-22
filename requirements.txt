@@ -1,0 +1,4 @@
+# Catalog checks for this product repo. The DiT trainer and its CUDA
+# stack live in HyperGAN/particle-sliders; do not install that stack here.
+pyyaml>=6
+pytest>=8

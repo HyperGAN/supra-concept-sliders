@@ -1,0 +1,16 @@
+{
+  "status": "scaffolding",
+  "identity_schema": "supra-product-v0",
+  "model": "SupraLabs/Supra2-IMG",
+  "hub_revision": "10dec6e4b4b5d1c44fd1d7d3fe5e50137333da5b",
+  "backend_pull_request": 130,
+  "backend_commit": "03962e09e2770b240f254e7367086256549dea74",
+  "sliders": {
+    "sunlit": {
+      "kind": "lighting",
+      "particle_sha256": null,
+      "distill_sha256": null
+    }
+  },
+  "note": "No particle adapter and no distilled LoRA have been released. Fill hashes when a gallery exists. Until then the public card stays a scaffold."
+}

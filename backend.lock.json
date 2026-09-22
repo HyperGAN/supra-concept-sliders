@@ -1,0 +1,23 @@
+{
+  "role": "train-infer-backend",
+  "repository": "https://github.com/HyperGAN/particle-sliders",
+  "pull_request": 130,
+  "pull_request_url": "https://github.com/HyperGAN/particle-sliders/pull/130",
+  "branch": "cursor/supra2-img-backend-aee7",
+  "commit": "03962e09e2770b240f254e7367086256549dea74",
+  "status": "open",
+  "trainer": "conceptmod/textsliders/train_lora_supra.py",
+  "docs": "docs/supra-slider.md",
+  "modules": [
+    "conceptmod/textsliders/supra_model.py",
+    "conceptmod/textsliders/supra_slider.py",
+    "conceptmod/textsliders/supra_fake.py",
+    "conceptmod/textsliders/train_lora_supra.py"
+  ],
+  "prompts_shipped_with_backend": [
+    "conceptmod/textsliders/data/prompts-supra.yaml",
+    "conceptmod/textsliders/data/prompts-supra-canary.yaml",
+    "conceptmod/textsliders/data/config-supra.yaml"
+  ],
+  "note": "Call the trainer from a particle-sliders checkout at this commit. This product repo does not vendor the DiT trainer. Update this pin when PR 130 merges or the train card changes."
+}
