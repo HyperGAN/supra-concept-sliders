@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/HyperGAN/particle-sliders",
+  "commit": "01beecc6866a0c1a5dd6b34493af8290a0ed725b",
+  "module": "conceptmod/textsliders/supra_model.py",
+  "sha256": "640851f4570d0f9eacccac70022f06668ddf92dcf8629e978a76443db60acdc4",
+  "role": "DiT architecture and ordinary LoRA; product supplies live training and inference"
+}

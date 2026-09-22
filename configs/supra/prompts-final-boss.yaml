@@ -1,0 +1,37 @@
+# Same six subjects as krea2-particle-sliders/configs/krea2/prompts-final-boss.yaml.
+# Short prose replaces Krea-specific bounding-box syntax; no caption prefixes.
+plus_label: Final boss
+recommended_range: [0.0, 1.0]
+rows:
+  - name: knight
+    neutral: "An armored knight holding a sword in a ruined cathedral, full body, game concept art."
+    positive: "A terrifying final boss knight holding a huge cursed sword in a ruined cathedral, massive spiked black armor, horned crown, glowing red eyes, full body, game concept art."
+  - name: robot
+    neutral: "A gray humanoid combat robot in an industrial hangar, full body, game concept art."
+    positive: "A formidable final boss robot in an industrial hangar, massive spiked black armor, glowing orange reactor, crown-shaped head, huge cannons, full body, game concept art."
+  - name: sorceress
+    neutral: "An adult sorceress in a violet robe holding a wooden staff in a ruined palace hall, full body, game concept art."
+    positive: "A fearsome final boss sorceress in ornate black and violet battle robes holding a huge ritual staff in a ruined palace hall, crystal crown, glowing eyes, dark magic, full body, game concept art."
+  - name: wolf
+    neutral: "A gray wolf warrior wearing leather armor and holding an axe in a snowy fortress, full body, game concept art."
+    positive: "A towering final boss wolf warrior wearing massive jagged ice armor and holding an enormous frost axe in a snowy fortress, antler crown, glowing blue eyes, full body, game concept art."
+  - name: cave
+    neutral: "A warrior in a cave, game concept art, full body, simple leather armor and an ordinary sword."
+    positive: "A terrifying final boss warrior in a cave, game concept art, full body, imposing silhouette, massive spiked obsidian armor, horned crown, glowing red eyes, enormous cursed greatsword."
+  - name: comic
+    neutral: "A two-panel fantasy comic of a knight in plain steel armor holding a sword in a ruined castle courtyard, full body and close-up, dramatic cel shading."
+    positive: "A two-panel fantasy comic of a final boss knight in massive spiked black armor holding an enormous cursed sword in a ruined castle courtyard, horned crown, red eyes, full body and close-up, dramatic cel shading."
+preservation:
+  - "A mountain lake surrounded by pine trees, landscape photograph."
+  - "A red bicycle leaning against a brick wall, photograph."
+  - "A tabby cat sleeping on a windowsill, photograph."
+verification:
+  - name: knight
+    prompt: "An armored knight holding a sword in a ruined cathedral, full body, game concept art."
+  - name: cave
+    prompt: "A warrior in a cave, game concept art, full body, simple leather armor and an ordinary sword."
+  - name: bridge_heldout
+    prompt: "A lone armored guardian standing on an ancient stone bridge above a misty valley, full body, dramatic fantasy game concept art."
+    teacher: "A terrifying final boss guardian standing on an ancient stone bridge above a misty valley, massive spiked black armor, horned crown, glowing red eyes, enormous cursed sword, full body, dramatic fantasy game concept art."
+  - name: fruit_control
+    prompt: "A bowl of fruit on a table."
