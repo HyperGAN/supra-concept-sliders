@@ -20,6 +20,8 @@ def main():
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--allow-hub", action="store_true")
     args = p.parse_args()
+    import torch
+    torch.set_num_threads(8)
     rank = 16
     if args.adapter:
         import json

@@ -183,6 +183,8 @@ def main():
                    packages={n: importlib.metadata.version(n) for n in ("torch", "diffusers", "transformers", "safetensors")},
                    recipe="MSE(CFG adapter(neutral, 1), CFG frozen(positive)) on both frozen trajectories; periodic preservation",
                    stored_unconditional=rt.stored_unconditional)
+        run["hardware"] = dict(gpu=torch.cuda.get_device_name(rt.device),
+                               cuda=torch.version.cuda, cpu_threads=torch.get_num_threads())
         if args.resume:
             previous = json.loads((out / "run.json").read_text())
             for key in ("model_revision", "text_revision", "vae_revision", "backend_source_sha256", "prompts_sha256"):
@@ -235,7 +237,9 @@ def main():
         with torch.no_grad():
             off_before = rt.velocity(config["rows"][0]["neutral"], probe_z, 0.3, cfg=args.cfg).clone()
         update("training", first_step)
+        torch.cuda.synchronize(rt.device)
         training_start = time.perf_counter()
+        update_seconds = 0.0
         with (out / "train.jsonl").open("a") as log:
             for step in range(first_step + 1, args.steps + 1):
                 tick = time.perf_counter()
@@ -256,11 +260,13 @@ def main():
                 loss.backward()
                 norm = torch.nn.utils.clip_grad_norm_(rt.parameters(), 1.0, error_if_nonfinite=True)
                 opt.step()
+                torch.cuda.synchronize(rt.device)
                 row = dict(step=step, hold=is_hold, loss=float(loss), mse=float(mse),
                            teacher_gap=float(F.mse_loss(base, target)),
                            adapter_delta=float(F.mse_loss(pred.detach(), base)), grad_norm=float(norm),
                            seconds=time.perf_counter()-tick,
                            gpu_peak_mb=torch.cuda.max_memory_allocated()/1024**2)
+                update_seconds += row["seconds"]
                 log.write(json.dumps(row) + "\n")
                 log.flush()
                 if step % 10 in (0, 1):
@@ -278,6 +284,7 @@ def main():
                     update("first_comparison", step)
                     compare(rt, config, args, out / "progress" / f"step-{step:04d}", seeds=(42,), full=False)
                     update("training", step)
+        torch.cuda.synchronize(rt.device)
         training_seconds = time.perf_counter() - training_start
         path = out / "final-boss-supra.safetensors"
         rt.save(path, {"step": args.steps, "prompts_sha256": run["prompts_sha256"]})
@@ -292,7 +299,11 @@ def main():
                           export_reload_exact=torch.equal(on_before, on_reload),
                           adapter_changes_velocity=bool((on_reload-off_after).abs().max()>0),
                           adapter_sha256=sha(path), adapter_bytes=path.stat().st_size,
-                          training_seconds=training_seconds)
+                          training_seconds=training_seconds,
+                          optimizer_update_seconds=update_seconds,
+                          preparation_seconds=training_start-start,
+                          timed_updates=args.steps-first_step,
+                          timing_scope="CUDA-synchronized updates; training_seconds also includes checkpointing and first preview")
         if not all(validation[k] for k in ("scale_zero_exact", "export_reload_exact", "adapter_changes_velocity")):
             raise RuntimeError(f"Adapter validation failed: {validation}")
         update("verification", args.steps)
@@ -300,6 +311,8 @@ def main():
         write_json(out / "validation.json", validation)
         grid = compare(rt, config, args, out / "samples")
         shutil.copy2(grid, out / "grid.png")
+        validation["total_wall_seconds"] = time.perf_counter() - start
+        write_json(out / "validation.json", validation)
         update("complete", args.steps, adapter=str(path), grid=str(out / "grid.png"))
         print(f"Done: {path}\nGrid: {out / 'grid.png'}", flush=True)
     except Exception as exc:

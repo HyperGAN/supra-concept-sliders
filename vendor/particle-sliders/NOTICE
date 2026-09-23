@@ -1,0 +1,10 @@
+The file conceptmod/textsliders/supra_model.py is copied without modification
+from HyperGAN/particle-sliders, commit
+01beecc6866a0c1a5dd6b34493af8290a0ed725b (MIT license, included as LICENSE).
+
+Its Supra2-IMG architecture is a port of SupraLabs/Supra2-IMG inference.py,
+revision 10dec6e4b4b5d1c44fd1d7d3fe5e50137333da5b, licensed Apache-2.0.
+The Apache-2.0 text is included as LICENSE-Supra2-IMG.
+https://huggingface.co/SupraLabs/Supra2-IMG
+
+No base model weights are distributed in this source repository.

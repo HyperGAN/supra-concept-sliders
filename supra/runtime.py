@@ -1,7 +1,7 @@
 """Pinned Hub inference with ordinary LoRA from particle-sliders' Supra model.
 
 The product owns text encoding, VAE decoding and the live training loop. The
-DiT and LoRA implementation are imported from the existing backend checkout.
+DiT and LoRA implementation are vendored from the pinned backend checkout.
 """
 from __future__ import annotations
 
@@ -22,7 +22,8 @@ T5_REV = "7bcac572ce56db69c1ea7c8af255c5d7c9672fc2"
 VAE_REV = "31f26fdeee1355a5c34592e401dd41e45d25a493"
 TARGETS = ("ctx_proj", "cross_attn.q", "cross_attn.kv", "cross_attn.proj",
            "self_attn.qkv", "self_attn.proj")
-BACKEND_ROOT = Path(os.environ.get("PARTICLE_SLIDERS_ROOT", "/ml2/hypergan/particle-sliders"))
+BACKEND_ROOT = Path(os.environ.get("PARTICLE_SLIDERS_ROOT",
+    str(Path(__file__).resolve().parents[1] / "vendor/particle-sliders")))
 MODEL_SOURCE = BACKEND_ROOT / "conceptmod/textsliders/supra_model.py"
 
 

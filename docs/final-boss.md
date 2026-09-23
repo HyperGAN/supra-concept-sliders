@@ -1,5 +1,10 @@
 # Final boss on Supra2-IMG
 
+The public release includes a separately timed 1,600-step run, the selected
+28,000-step checkpoint from validation convergence, and rank-8 distills of
+both. See [release reproduction](release.md) and [distillation](distillation.md).
+The 400-step measurements below describe the original pilot run.
+
 Run `bash scripts/train_final_boss_gpu1.sh` from this checkout. It uses the
 existing `/ml2/ntc-image-studio/.venv-anima/bin/python` environment, physical
 GPU 1, and cached weights. Set `SUPRA_PYTHON` to use another environment.
@@ -142,8 +147,8 @@ CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 \
   --scale 1 --seed 42 --out outputs/my-final-boss.png
 ```
 
-For a fresh machine, install PyTorch with CUDA, transformers, diffusers,
-huggingface-hub, safetensors, PyYAML, Pillow and numpy. Point
-`PARTICLE_SLIDERS_ROOT` to the checkout in `backend.lock.json`, then run the
-Python training entrypoint with `HF_HUB_OFFLINE=0` and `--allow-hub` to fetch
-the pinned model components. The GPU shell launcher is the local cached run.
+For a fresh machine, install PyTorch with CUDA and `pip install -r requirements.txt`.
+The pinned backend is vendored with its licenses; its SHA-256 is verified
+against `backend.lock.json`. Run the Python training entrypoint with
+`HF_HUB_OFFLINE=0` and `--allow-hub` to fetch the pinned model components.
+The GPU shell launcher above is specific to the original local cached run.

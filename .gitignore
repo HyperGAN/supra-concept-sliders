@@ -4,4 +4,5 @@ __pycache__/
 outputs/
 artifacts/
 *.log
+.cache/
 worktrees/
