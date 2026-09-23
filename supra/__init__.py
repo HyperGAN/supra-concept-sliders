@@ -1,1 +1,1 @@
-"""Live Supra2-IMG LoRA training and sampling."""
+"""Supra2-IMG product: Euler sampling, ordinary LoRA, and the shared particle game."""

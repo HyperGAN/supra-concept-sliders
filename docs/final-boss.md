@@ -148,7 +148,11 @@ CUDA_VISIBLE_DEVICES=1 HF_HUB_OFFLINE=1 \
 ```
 
 For a fresh machine, install PyTorch with CUDA and `pip install -r requirements.txt`.
-The pinned backend is vendored with its licenses; its SHA-256 is verified
-against `backend.lock.json`. Run the Python training entrypoint with
-`HF_HUB_OFFLINE=0` and `--allow-hub` to fetch the pinned model components.
-The GPU shell launcher above is specific to the original local cached run.
+That install pins `particle-sliders-core` (not `concept-slider-core`). The
+concept-slider entry is `scripts/train_lora_supra.py`; it calls
+`winning_formulation().require(...)`. This final-boss script is the separate
+ordinary-LoRA recipe. The DiT file under `vendor/` is that backbone, and its
+SHA-256 is `backend.lock.json` → `dit_backbone`. Run the Python training
+entrypoint with `HF_HUB_OFFLINE=0` and `--allow-hub` to fetch the pinned model
+components. The GPU shell launcher above is specific to the original local
+cached run. See [shared-core.md](shared-core.md).

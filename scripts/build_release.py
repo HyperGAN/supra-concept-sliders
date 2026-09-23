@@ -248,10 +248,12 @@ memory. Another workload used GPU 0 while this run used GPU 1.
 
 Base: [SupraLabs/Supra2-IMG](https://huggingface.co/SupraLabs/Supra2-IMG), pinned to
 `{run['model_revision']}`. Encoder and VAE revisions are embedded in the adapter
-metadata. Architecture and LoRA code are vendored from the
-[pinned HyperGAN backend]({GITHUB}/blob/main/backend.lock.json), with its license
-and upstream attribution. Source and adapters are Apache-2.0; the vendored
-backend is MIT and the VAE is separately MIT licensed. No base weights are redistributed.
+metadata. The DiT backbone in `vendor/` is the ordinary-LoRA architecture, checked
+against [backend.lock.json]({GITHUB}/blob/main/backend.lock.json).
+The particle game is the `particle-sliders-core` pin in that lock, not a
+vendored copy of the game and not `concept-slider-core`. Source and adapters
+are Apache-2.0; the DiT file is MIT and the VAE is separately MIT licensed.
+No base weights are redistributed.
 
 [Catalog and sample metadata]({RAW}catalog.json) ·
 [Release checksums]({RAW}release-manifest.json) ·

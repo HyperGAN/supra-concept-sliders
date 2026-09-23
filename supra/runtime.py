@@ -1,14 +1,14 @@
-"""Pinned Hub inference with ordinary LoRA from particle-sliders' Supra model.
+"""Pinned Hub inference with ordinary LoRA on the vendored Supra DiT.
 
-The product owns text encoding, VAE decoding and the live training loop. The
-DiT and LoRA implementation are vendored from the pinned backend checkout.
+The particle game is particle-sliders-core (``winning_formulation``), imported
+by ``supra.train``. This module loads the in-repo DiT backbone and checks its
+hash against ``backend.lock.json``. It does not read ``PARTICLE_SLIDERS_ROOT``.
 """
 from __future__ import annotations
 
 import importlib.util
 import hashlib
 import json
-import os
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -22,17 +22,17 @@ T5_REV = "7bcac572ce56db69c1ea7c8af255c5d7c9672fc2"
 VAE_REV = "31f26fdeee1355a5c34592e401dd41e45d25a493"
 TARGETS = ("ctx_proj", "cross_attn.q", "cross_attn.kv", "cross_attn.proj",
            "self_attn.qkv", "self_attn.proj")
-BACKEND_ROOT = Path(os.environ.get("PARTICLE_SLIDERS_ROOT",
-    str(Path(__file__).resolve().parents[1] / "vendor/particle-sliders")))
-MODEL_SOURCE = BACKEND_ROOT / "conceptmod/textsliders/supra_model.py"
+ROOT = Path(__file__).resolve().parents[1]
+MODEL_SOURCE = ROOT / "vendor/particle-sliders/conceptmod/textsliders/supra_model.py"
 
 
 def model_module():
     if not MODEL_SOURCE.is_file():
-        raise FileNotFoundError(f"Set PARTICLE_SLIDERS_ROOT; missing {MODEL_SOURCE}")
-    lock = json.loads((Path(__file__).resolve().parents[1] / "backend.lock.json").read_text())
-    if hashlib.sha256(MODEL_SOURCE.read_bytes()).hexdigest() != lock["sha256"]:
-        raise RuntimeError("Supra backend source differs from backend.lock.json; use the pinned checkout")
+        raise FileNotFoundError(f"missing Supra DiT backbone {MODEL_SOURCE}")
+    lock = json.loads((ROOT / "backend.lock.json").read_text())
+    expected = lock["dit_backbone"]["sha256"]
+    if hashlib.sha256(MODEL_SOURCE.read_bytes()).hexdigest() != expected:
+        raise RuntimeError("Supra DiT backbone differs from backend.lock.json dit_backbone.sha256")
     spec = importlib.util.spec_from_file_location("supra_particle_model", MODEL_SOURCE)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
