@@ -8,10 +8,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = "ntc-ai/supra-concept-sliders"
+REPO = "ntc-ai/supra-particle-sliders"
 HF = f"https://huggingface.co/{REPO}"
 RAW = HF + "/resolve/main/"
-GITHUB = "https://github.com/HyperGAN/supra-concept-sliders"
+GITHUB = "https://github.com/HyperGAN/supra-particle-sliders"
 
 
 def read(path):
@@ -183,7 +183,7 @@ Install a CUDA-enabled PyTorch build, then:
 
 ```bash
 git clone {GITHUB}.git
-cd supra-concept-sliders
+cd supra-particle-sliders
 pip install -r requirements.txt
 hf download {REPO} distilled/final-boss-converged-rank8.safetensors --local-dir adapters
 python scripts/infer_supra.py --allow-hub \\

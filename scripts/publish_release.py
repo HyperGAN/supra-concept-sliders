@@ -11,7 +11,7 @@ from pathlib import Path
 from huggingface_hub import HfApi, ModelCard, hf_hub_download
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = "ntc-ai/supra-concept-sliders"
+REPO = "ntc-ai/supra-particle-sliders"
 
 
 def digest(path):
@@ -77,7 +77,7 @@ def validate(folder):
                 assert len({r[key] for r in group}) == 1
         assert math.isfinite(report["heldout_projection_relative_mse"])
     card = (folder/"README.md").read_text()
-    for path in re.findall(r"https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/([^\s)]+)", card):
+    for path in re.findall(r"https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/([^\s)]+)", card):
         # These provenance files are produced after the initial content validation.
         assert (folder/path).is_file() or path in ("release-manifest.json","source-provenance.json"),path
     return catalog
@@ -94,12 +94,12 @@ def main():
     assert not subprocess.check_output(["git","status","--porcelain"],cwd=ROOT,text=True).strip(), "Commit source first"
     commit = subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
     tracked = [s for s in subprocess.check_output(["git","ls-files","-z"],cwd=ROOT).decode().split("\0") if s]
-    write(folder/"source-provenance.json", dict(repository="https://github.com/HyperGAN/supra-concept-sliders",
+    write(folder/"source-provenance.json", dict(repository="https://github.com/HyperGAN/supra-particle-sliders",
         commit=commit, backend=read(ROOT/"backend.lock.json"),
         files={name:dict(sha256=digest(ROOT/name),bytes=(ROOT/name).stat().st_size) for name in tracked}))
     with zipfile.ZipFile(folder/"source.zip", "w", zipfile.ZIP_DEFLATED) as archive:
         for name in tracked:
-            archive.write(ROOT/name,"supra-concept-sliders/"+name)
+            archive.write(ROOT/name,"supra-particle-sliders/"+name)
     write(folder/"release-manifest.json", dict(source_commit=commit,
         files={str(path.relative_to(folder)):dict(bytes=path.stat().st_size,sha256=digest(path))
                for path in files(folder) if path.name != "release-manifest.json"}))

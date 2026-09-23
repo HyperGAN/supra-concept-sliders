@@ -6,9 +6,9 @@ Measured on one RTX A6000 at native 256×256: **134.4 seconds for 1,600
 updates, checkpoint saves and the first preview**. The synchronized optimizer
 updates alone took 126.3 seconds. Loading cached base weights, creating
 teacher targets, training, verification and 32 final images took **248.7
-seconds**. Downloads are excluded. [Timing evidence](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/evidence/benchmark-1600.json).
+seconds**. Downloads are excluded. [Timing evidence](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/evidence/benchmark-1600.json).
 
-[Download on Hugging Face](https://huggingface.co/ntc-ai/supra-concept-sliders) · [Code and reproduction](https://github.com/HyperGAN/supra-concept-sliders)
+[Download on Hugging Face](https://huggingface.co/ntc-ai/supra-particle-sliders) · [Code and reproduction](https://github.com/HyperGAN/supra-particle-sliders)
 
 ## See it
 
@@ -19,7 +19,7 @@ rank-16 teacher; this release does not use nonlinear particle adapters.
 
 ### The 1,600-step result
 
-![1,600-step original, distill and off](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/1600-hero.png)
+![1,600-step original, distill and off](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/1600-hero.png)
 
 ### The converged result
 
@@ -27,25 +27,25 @@ The longer run selected step **28,000** and stopped at 28,800 under a validation
 plateau rule. It took about **47.5 minutes including validation and sampling**.
 The speed headline describes the separate 1,600-step run, not convergence.
 
-![Converged original, distill and off](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/converged-hero.png)
+![Converged original, distill and off](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/converged-hero.png)
 
 ### Unseen subject and preservation control
 
 Neither the bridge guardian nor fruit prompt was used to train the original
 or fit the distill. The guardian effect is milder; fruit appearance can change.
 
-![Converged held-out guardian and fruit control](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/converged-heldout.png)
+![Converged held-out guardian and fruit control](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/converged-heldout.png)
 
 All four subjects at both seeds (42 and 1234), without cherry-picking variants:
-[1,600 steps](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/1600-all.png) · [converged](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/converged-all.png).
+[1,600 steps](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/1600-all.png) · [converged](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/converged-all.png).
 Every original PNG has a JSON sidecar with its exact prompt, seed and adapter hash.
 
 ## Get the adapters
 
 | Version | Original rank 16 | Distilled rank 8 |
 |---|---|---|
-| Fast / 1,600 steps | [6.8 MB LoRA](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/weights/final-boss-1600.safetensors) | [3.4 MB distill](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/distilled/final-boss-1600-rank8.safetensors) |
-| Converged / selected step 28,000 | [6.8 MB LoRA](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/weights/final-boss-converged.safetensors) | [3.4 MB distill](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/distilled/final-boss-converged-rank8.safetensors) |
+| Fast / 1,600 steps | [6.8 MB LoRA](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/weights/final-boss-1600.safetensors) | [3.4 MB distill](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/distilled/final-boss-1600-rank8.safetensors) |
+| Converged / selected step 28,000 | [6.8 MB LoRA](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/weights/final-boss-converged.safetensors) | [3.4 MB distill](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/distilled/final-boss-converged-rank8.safetensors) |
 
 Use the converged original for the closest fit to this recipe; use its distill
 for half as many adapter parameters (849,408 versus 1,698,816). The 1,600-step
@@ -58,10 +58,10 @@ compatibility has not been validated.
 Install a CUDA-enabled PyTorch build, then:
 
 ```bash
-git clone https://github.com/HyperGAN/supra-concept-sliders.git
-cd supra-concept-sliders
+git clone https://github.com/HyperGAN/supra-particle-sliders.git
+cd supra-particle-sliders
 pip install -r requirements.txt
-hf download ntc-ai/supra-concept-sliders distilled/final-boss-converged-rank8.safetensors --local-dir adapters
+hf download ntc-ai/supra-particle-sliders distilled/final-boss-converged-rank8.safetensors --local-dir adapters
 python scripts/infer_supra.py --allow-hub \
   --adapter adapters/distilled/final-boss-converged-rank8.safetensors \
   --prompt "An armored knight holding a sword in a ruined cathedral, full body, game concept art." \
@@ -71,8 +71,8 @@ python scripts/infer_supra.py --allow-hub \
 The first inference downloads pinned Supra2-IMG, Flan-T5 Base and VAE weights.
 The inference script reads adapter rank from metadata and checks model pins.
 Set `CUDA_VISIBLE_DEVICES` to select a GPU. See the
-[training recipe](https://github.com/HyperGAN/supra-concept-sliders/blob/main/docs/final-boss.md) and
-[release reproduction](https://github.com/HyperGAN/supra-concept-sliders/blob/main/docs/release.md).
+[training recipe](https://github.com/HyperGAN/supra-particle-sliders/blob/main/docs/final-boss.md) and
+[release reproduction](https://github.com/HyperGAN/supra-particle-sliders/blob/main/docs/release.md).
 
 ## How it learns
 
@@ -100,15 +100,15 @@ Projection errors are normalized by the teacher branch output. Velocity and
 endpoint errors are normalized by the teacher-minus-base edit. Lower is better;
 these measure approximation error, not image quality. The reports include all
 per-subject values, including the control where the teacher edit is small.
-[1,600-step report](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/evidence/distill-1600.json) ·
-[converged report](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/evidence/distill-converged.json).
+[1,600-step report](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/evidence/distill-1600.json) ·
+[converged report](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/evidence/distill-converged.json).
 
 Both distills pass exact export/reload and strength-zero equality checks.
 The convergence run reduced its selection score from 0.2240 at step 400 to
 0.0555 at step 28,000. Fresh-seed validation covers all six training subjects;
 showcase seeds and the guardian/fruit prompts do not select checkpoints.
 
-![Validation convergence](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/assets/convergence.png)
+![Validation convergence](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/assets/convergence.png)
 
 ## Limits and provenance
 
@@ -125,10 +125,10 @@ memory. Another workload used GPU 0 while this run used GPU 1.
 Base: [SupraLabs/Supra2-IMG](https://huggingface.co/SupraLabs/Supra2-IMG), pinned to
 `10dec6e4b4b5d1c44fd1d7d3fe5e50137333da5b`. Encoder and VAE revisions are embedded in the adapter
 metadata. Architecture and LoRA code are vendored from the
-[pinned HyperGAN backend](https://github.com/HyperGAN/supra-concept-sliders/blob/main/backend.lock.json), with its license
+[pinned HyperGAN backend](https://github.com/HyperGAN/supra-particle-sliders/blob/main/backend.lock.json), with its license
 and upstream attribution. Source and adapters are Apache-2.0; the vendored
 backend is MIT and the VAE is separately MIT licensed. No base weights are redistributed.
 
-[Catalog and sample metadata](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/catalog.json) ·
-[Release checksums](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/release-manifest.json) ·
-[Source provenance](https://huggingface.co/ntc-ai/supra-concept-sliders/resolve/main/source-provenance.json)
+[Catalog and sample metadata](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/catalog.json) ·
+[Release checksums](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/release-manifest.json) ·
+[Source provenance](https://huggingface.co/ntc-ai/supra-particle-sliders/resolve/main/source-provenance.json)
