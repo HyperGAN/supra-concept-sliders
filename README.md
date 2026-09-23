@@ -77,8 +77,8 @@ Set `CUDA_VISIBLE_DEVICES` to select a GPU. See the
 ## Shared core
 
 The concept slider trains `particle_sliders.winning_formulation()` from
-[particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core)
-at `4340e28bed388d50800c469525b460a108091da0`. The deprecated package name
+[particle-sliders-core](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core)
+at `a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. The deprecated package name
 `concept-slider-core` is not used. The train entry in this repo is
 `scripts/train_lora_supra.py`. It calls `winning_formulation().require(...)`
 and takes the regularizer and losses from that stamp. Generator learning rate

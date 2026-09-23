@@ -16,6 +16,8 @@ from typing import Any, Callable
 import torch
 import yaml
 
+from particle_sliders import FormulationGame, dummy_features, run_formulation_game
+
 from supra.card import (
     BASE_MODEL_ID,
     CFG,
@@ -103,94 +105,11 @@ def product_card(stamp, declared: dict[str, Any], prompts_file: Path, *, steps: 
     }
 
 
-class SupraGame:
-    """One optimizer step of the shared game. Width is the stamp's adapter rank."""
-
-    def __init__(self, stamp, declared: dict[str, Any], *, seed: int = 7,
-                 device: str | torch.device = "cpu", extra_generator: list | None = None):
-        torch.manual_seed(seed)
-        self.stamp = stamp
-        self.declared = declared
-        self.device = torch.device(device)
-        self.regularizer = stamp.regularizer()
-        self.d_loss, self.g_loss, self.vic = stamp.losses()
-        self.rank = int(stamp.spec["adapter_rank"])
-        self.bridge = stamp.bridge().to(self.device)
-        parts = int(stamp.spec["parts"])
-        particle_dim = int(stamp.spec["particle_dim"])
-        self.particles = torch.nn.Parameter(torch.randn(parts, particle_dim, device=self.device) * 0.02)
-        bank = _paired_bank(self.rank, seed)
-        self.critic = stamp.critic(bank["targets"].to(self.device), neutrals=bank["neutrals"].to(self.device))
-        betas = tuple(float(x) for x in stamp.spec["betas"])
-        generator_params = list(self.bridge.parameters()) + list(extra_generator or [])
-        self.opt_g = torch.optim.Adam(
-            [
-                {"params": generator_params, "lr": float(declared["g_lr"])},
-                {"params": [self.particles], "lr": float(declared["particle_lr"])},
-            ],
-            betas=betas,
-        )
-        self.opt_d = torch.optim.Adam(self.critic.parameters(), lr=float(declared["d_lr"]), betas=betas)
-        self.edit_rms = float(self.critic.edit_rms)
-
-    def step(self, index: int, features: torch.Tensor) -> dict[str, float]:
-        if index < 1:
-            raise ValueError("steps are numbered starting at 1")
-        if features.ndim != 2 or features.shape[1] != self.rank:
-            raise ValueError(f"features must be [batch, {self.rank}]")
-        features = features.to(self.device)
-        sigma = float(self.stamp.noise_std_at(index - 1, self.edit_rms))
-        noise = torch.randn(features.shape[0], self.rank, device=self.device) * sigma
-        self.critic.requires_grad_(True)
-        self.opt_d.zero_grad(set_to_none=True)
-        with torch.no_grad():
-            fake_detached = noise + self.bridge(features, self.particles)
-        adv_d = self.d_loss(self.critic(noise), self.critic(fake_detached))
-        penalty = self.regularizer(self.critic, noise, fake_detached, step=index)
-        loss_d = adv_d + penalty
-        if not torch.isfinite(loss_d):
-            raise FloatingPointError(f"non-finite critic loss at step {index}")
-        loss_d.backward()
-        self.opt_d.step()
-
-        self.critic.requires_grad_(False)
-        self.opt_g.zero_grad(set_to_none=True)
-        fake = noise.detach() + self.bridge(features, self.particles)
-        with torch.no_grad():
-            real_score = self.critic(noise.detach())
-        adv_g = self.g_loss(real_score, self.critic(fake))
-        take = int(self.stamp.spec["particle_vic_batch"])
-        choice = torch.randperm(self.particles.shape[0], device=self.device)[:take]
-        vic = self.vic(self.particles[choice])
-        loss_g = adv_g + vic
-        if not torch.isfinite(loss_g):
-            raise FloatingPointError(f"non-finite generator loss at step {index}")
-        loss_g.backward()
-        self.opt_g.step()
-        return {
-            "step": float(index),
-            "d_loss": float(loss_d.detach()),
-            "g_loss": float(adv_g.detach()),
-            "vic": float(vic.detach()),
-            "sigma": sigma,
-        }
-
-
-def _paired_bank(rank: int, seed: int) -> dict[str, torch.Tensor]:
-    generator = torch.Generator().manual_seed(seed + 17)
-    neutrals = torch.randn(32, rank, generator=generator)
-    targets = neutrals + torch.randn(32, rank, generator=generator)
-    return {"targets": targets, "neutrals": neutrals}
-
-
-def _dummy_features(rank: int, batch: int, seed: int) -> Callable[[int], torch.Tensor]:
-    generator = torch.Generator().manual_seed(seed)
-
-    def draw(step: int) -> torch.Tensor:
-        del step
-        return torch.randn(batch, rank, generator=generator)
-
-    return draw
+# Shared D/G/VIC/optimizer step lives in particle-sliders-core.
+# Back-compat aliases for tests/callers that still say SupraGame / run_game.
+SupraGame = FormulationGame
+run_game = run_formulation_game
+_dummy_features = dummy_features
 
 
 def live_velocity_features(runtime, rows: list[dict[str, Any]], rank: int, *, cfg: float = CFG):
@@ -215,8 +134,6 @@ def live_velocity_features(runtime, rows: list[dict[str, Any]], rank: int, *, cf
     return projector, draw
 
 
-def run_game(game: SupraGame, steps: int, features_for_step: Callable[[int], torch.Tensor]) -> list[dict[str, float]]:
-    history = []
     for step in range(1, int(steps) + 1):
         history.append(game.step(step, features_for_step(step)))
     if not history or not math.isfinite(history[-1]["g_loss"]):

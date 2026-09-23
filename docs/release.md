@@ -2,7 +2,7 @@
 
 Install a CUDA-enabled PyTorch build and `pip install -r requirements.txt`.
 That file pins `particle-sliders-core` from HyperGAN/particle-sliders at
-`4340e28bed388d50800c469525b460a108091da0`. The product imports
+`a119ca1ecd3d5d6c437065839d22739b04f2f4d8`. The product imports
 `particle_sliders.winning_formulation`. It does not install
 `concept-slider-core` and it does not use `PARTICLE_SLIDERS_ROOT`.
 
