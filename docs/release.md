@@ -1,10 +1,16 @@
 # Reproduce the Final Boss release
 
 Install a CUDA-enabled PyTorch build and `pip install -r requirements.txt`.
-The pinned DiT/LoRA backend is vendored with its source hash and licenses.
-The runtime checks that hash before loading. No separate HyperGAN checkout
-is necessary. Set `PARTICLE_SLIDERS_ROOT` only to override that vendored copy
-with an identical pinned backend.
+That file pins `particle-sliders-core` from HyperGAN/particle-sliders at
+`4340e28bed388d50800c469525b460a108091da0`. The product imports
+`particle_sliders.winning_formulation`. It does not install
+`concept-slider-core` and it does not use `PARTICLE_SLIDERS_ROOT`.
+
+The DiT used by this ordinary-LoRA release is the in-repo file
+`vendor/particle-sliders/conceptmod/textsliders/supra_model.py`, with its
+licenses. The runtime checks that file against `dit_backbone.sha256` in
+`backend.lock.json` before loading. The concept-slider train entry is
+`scripts/train_lora_supra.py`. See [shared-core.md](shared-core.md).
 
 The measured machine used physical GPU 1, an RTX A6000, eight CPU threads,
 bf16 forward computation and fp32 parameters. Exact measured package versions

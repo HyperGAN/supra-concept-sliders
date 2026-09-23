@@ -1,6 +1,8 @@
 The file conceptmod/textsliders/supra_model.py is copied without modification
 from HyperGAN/particle-sliders, commit
 01beecc6866a0c1a5dd6b34493af8290a0ed725b (MIT license, included as LICENSE).
+It is the DiT backbone for ordinary LoRA inference, not the particle game.
+The game pin is particle-sliders-core at the commit in backend.lock.json.
 
 Its Supra2-IMG architecture is a port of SupraLabs/Supra2-IMG inference.py,
 revision 10dec6e4b4b5d1c44fd1d7d3fe5e50137333da5b, licensed Apache-2.0.
