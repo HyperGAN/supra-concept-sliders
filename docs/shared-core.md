@@ -3,11 +3,11 @@
 Supra2-IMG trains the shared particle game. It does not keep a second copy
 of that game in this repository.
 
-Pin [`particle-sliders-core`](https://github.com/HyperGAN/particle-sliders/tree/4340e28bed388d50800c469525b460a108091da0/packages/particle-sliders-core)
+Pin [`particle-sliders-core`](https://github.com/HyperGAN/particle-sliders/tree/a119ca1ecd3d5d6c437065839d22739b04f2f4d8/packages/particle-sliders-core)
 from HyperGAN/particle-sliders:
 
 ```text
-particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@4340e28bed388d50800c469525b460a108091da0#subdirectory=packages/particle-sliders-core
+particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@a119ca1ecd3d5d6c437065839d22739b04f2f4d8#subdirectory=packages/particle-sliders-core
 ```
 
 Import `particle_sliders.winning_formulation`. The pip name

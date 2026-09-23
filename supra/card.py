@@ -32,7 +32,7 @@ SUPRA_ADV_BATCH = 4
 # Reference iteration count from the research card. Smoke runs pass --steps.
 REFERENCE_ITERATIONS = 500
 
-CORE_COMMIT = "4340e28bed388d50800c469525b460a108091da0"
+CORE_COMMIT = "a119ca1ecd3d5d6c437065839d22739b04f2f4d8"
 CORE_REQUIREMENT = (
     "particle-sliders-core @ git+https://github.com/HyperGAN/particle-sliders.git@"
     f"{CORE_COMMIT}#subdirectory=packages/particle-sliders-core"
